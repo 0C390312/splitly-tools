@@ -1,1 +1,2 @@
 # splitly-tools
+Automatization 
