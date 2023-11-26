@@ -1,0 +1,17 @@
+
+version: '3'
+services:
+  core:
+    container_name: splitly-core
+    image: splitly-core:latest
+    networks:
+      - splitly-network
+    profiles:
+      - splitly
+    ports:
+      - 48080:8080
+
+networks:
+  splitly-network:
+    name: splitly-network
+    driver: bridge
