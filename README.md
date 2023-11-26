@@ -4,5 +4,5 @@ Automatization for splitly project. This repo contains tools to make life easier
 # starting docker compose
 To run docker compose project just run command
 ```shell
-docker compose up -d -p splitly
+docker compose up -d
 ```
