@@ -1,17 +1,26 @@
-
-version: '3'
+version: "3"
 services:
   core:
     container_name: splitly-core
     image: splitly-core:latest
-    networks:
-      - splitly-network
+    networks: [sp-net]
     profiles:
       - splitly
     ports:
       - 48080:8080
 
+  ui:
+    container_name: splitly-ui
+    image: splitly-ui:latest
+    networks: [sp-net]
+    profiles:
+      - splitly
+    ports:
+      - 7001:3000
+    environment: 
+      NUXT_PUBLIC_SERVER_URL: http://localhost:48080
+
 networks:
-  splitly-network:
+  sp-net:
     name: splitly-network
     driver: bridge
