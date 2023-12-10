@@ -6,8 +6,6 @@ services:
     networks: [sp-net]
     profiles:
       - splitly
-    ports:
-      - 48080:8080
 
   ui:
     container_name: splitly-ui
@@ -15,10 +13,17 @@ services:
     networks: [sp-net]
     profiles:
       - splitly
-    ports:
-      - 7001:3000
     environment: 
-      NUXT_PUBLIC_SERVER_URL: http://localhost:48080
+      NUXT_PUBLIC_SERVER_URL: http://localhost/api
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    networks: [sp-net]
+    ports:
+      - 80:80
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/conf.d/default.conf  
 
 networks:
   sp-net:
