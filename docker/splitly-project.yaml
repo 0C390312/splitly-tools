@@ -1,17 +1,31 @@
-
-version: '3'
+version: "3"
 services:
   core:
     container_name: splitly-core
     image: splitly-core:latest
-    networks:
-      - splitly-network
+    networks: [sp-net]
     profiles:
       - splitly
+
+  ui:
+    container_name: splitly-ui
+    image: splitly-ui:latest
+    networks: [sp-net]
+    profiles:
+      - splitly
+    environment: 
+      NUXT_PUBLIC_SERVER_URL: http://localhost/api
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    networks: [sp-net]
     ports:
-      - 48080:8080
+      - 80:80
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/conf.d/default.conf  
 
 networks:
-  splitly-network:
+  sp-net:
     name: splitly-network
     driver: bridge
